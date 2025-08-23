@@ -1,0 +1,6 @@
+build/
+opencv-0929/
+*.o
+*.so
+tmpfiles/
+myprog
