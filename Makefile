@@ -1,27 +1,35 @@
 CC=gcc
 CFLAGS= -Wall -g -std=c11
-SRCS=$(wildcard *.c)
+
+SRCS_DIR:=src
 BUILD_DIR=build
-OBJS=$(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 TARGET=myprog
 LDFLAGS=-lreadline
+
+SRCS:=$(shell find $(SRCS_DIR) -name "*.c")
+#SRCS=$(wildcard $(SRCS_DIR)/*.c)
+
+OBJS=$(patsubst $(SRCS_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+
 
 all:$(TARGET)
 
 $(TARGET):$(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-$(BUILD_DIR)/%.o:%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o:$(SRCS_DIR)/%.c
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD_DIR):
-	mkdir -p $@
+#$(BUILD_DIR):
+#	mkdir -p $@
 
 clean:
 	rm -rf $(OBJS) $(TARGET) $(BUILD_DIR)
 
-direct:
-	$(CC) $(CFLAGS) $(SRCS) -o TARGET $(LDFLAGS)
+test:
+	@echo $(SRCS)
+	@echo $(OBJS)
 
 .PHONY: all clean
 

@@ -4,3 +4,4 @@ opencv-0929/
 *.so
 tmpfiles/
 myprog
+.vscode/
