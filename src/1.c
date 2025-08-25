@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "user/sys.h"
+#include "sys.h"
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "drivers/multi.h"
+#include "../drivers/multi.h"
 int main(int argc, char* argv[])
 { 
     for(int i=1;i<argc;i+=3)

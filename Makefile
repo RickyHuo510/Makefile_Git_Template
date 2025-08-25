@@ -17,12 +17,12 @@ all:$(TARGET)
 $(TARGET):$(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-$(BUILD_DIR)/%.o:$(SRCS_DIR)/%.c
+$(BUILD_DIR)/%.o:$(SRCS_DIR)/%.c | $(BUILD_DIR)
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-#$(BUILD_DIR):
-#	mkdir -p $@
+$(BUILD_DIR):
+	mkdir -p $@
 
 clean:
 	rm -rf $(OBJS) $(TARGET) $(BUILD_DIR)
